@@ -4,6 +4,7 @@ import math
 import re
 import sys
 from pathlib import Path
+from app_version import __version__
 import tkinter as tk
 from tkinter import filedialog, messagebox, simpledialog, ttk
 
@@ -561,7 +562,7 @@ class App(tk.Tk):
         self._last_dpi = None
         self._update_scaling()
         self.bind("<Configure>", self._on_configure)
-        self.title("钢琴块2 MIDI 转 JSON")
+        self.title(f"钢琴块2自制谱转换器 v{__version__}")
         size_window(self, 1320, 1020, 820, 620)
         self.midi = None
         self.imported_score = None
@@ -1317,5 +1318,8 @@ class App(tk.Tk):
 
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--version"]:
+        print(__version__)
+        sys.exit(0)
     enable_dpi_awareness()
     App().mainloop()
